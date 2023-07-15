@@ -47,15 +47,16 @@ export default async (req: Request & SessionData, res: Response) => {
 
         res.render("account", {
             userData: userData,
-            created_at: moment(userData.created_at).format("Do MMMM YYYY, h:mma"),
-            updated_at: moment(userData.updated_at).format("Do MMMM YYYY, h:mma"),
+            created_at: userData.created_at,
+            updated_at: userData.updated_at,
             emailData: emailData,
             primaryEmail: primaryEmail,
             orgData: orgData,
             starredGistData: starredGistData,
             starredRepoData: starredRepoData,
             functions: {
-                formatBytes: formatBytes
+                formatBytes: formatBytes,
+                moment: moment
             }
         })
     } catch(err) {
