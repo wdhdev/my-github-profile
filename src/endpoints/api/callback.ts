@@ -12,7 +12,7 @@ export default async (req: Request & SessionData, res: Response) => {
         client_id: process.env.github_client_id,
         client_secret: process.env.github_client_secret,
         code: code,
-        redirect_uri: "http://localhost:3000/api/callback"
+        redirect_uri: "https://my-github-profile.wdh.gg/api/callback"
     })
 
     try {
