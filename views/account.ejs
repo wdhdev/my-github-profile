@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- HTML Meta Tags -->
+        <title>Your GitHub Account</title>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="https://github.com/favicon.ico">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+        <!-- Scripts -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body class="p-8 max-w-xl m-auto bg-zinc-900 text-white text-center">
+        <div class="mb-6">
+            <img class="m-auto h-24 rounded-full mb-3" src="<%= userData.avatar_url %>" alt="Avatar">
+            <h1 class="text-2xl font-bold"><%= userData.name || userData.login %></h1>
+            <p class="text-gray-400 mb-1"><%= userData.name ? `@${userData.login}` : null %></p>
+
+            <% if(userData.site_admin) { %>
+                <span class="outline outline-1 outline-[#1f6feb] text-[#1f6feb] text-xs font-medium px-2 py-0.5 rounded-full mr-1">STAFF</span>
+            <% } %>
+
+            <% if(userData.plan.name === "pro") { %>
+                <span class="outline outline-1 outline-[#a371f7] text-[#a371f7] text-xs font-medium px-2 py-0.5 rounded-full mr-1">PRO</span>
+            <% } %>
+
+            <% if(userData.hireable) { %>
+                <span class="outline outline-1 outline-[#db6d28] text-[#db6d28] text-xs font-medium px-2 py-0.5 rounded-full">HIREABLE</span>
+            <% } %>
+        </div>
+
+        <div class="text-left mb-4">
+            <h2 class="text-2xl font-semibold mb-2">Public Profile</h2>
+
+            <% if(!userData.bio && !userData.company && !userData.location && !userData.email && !userData.blog && !userData.twitter_username) { %>
+                <p class="italic">You have no public information available.</p>
+            <% } %>
+
+            <% if(userData.bio) { %>
+                <p title="Bio" class="italic"><i class="fa-solid fa-circle-info text-gray-400"></i> <%= userData.bio %></p>
+            <% } %>
+
+            <% if(userData.company) { %>
+                <p title="Company"><i class="fa-solid fa-briefcase text-gray-400"></i> <%= userData.company %></p>
+            <% } %>
+
+            <% if(userData.location) { %>
+                <p title="Location"><i class="fa-solid fa-location-dot text-gray-400"></i> <%= userData.location %></p>
+            <% } %>
+
+            <% if(userData.email) { %>
+                <p title="Public Email"><i class="fa-solid fa-envelope text-gray-400"></i> <a class="text-blue-500 hover:text-blue-600" href="mailto:<%= userData.email %>"><%= userData.email %></a></p>
+            <% } %>
+
+            <% if(userData.blog) { %>
+                <p title="Website"><i class="fa-solid fa-link text-gray-400"></i> <a class="text-blue-500 hover:text-blue-600" href="<%= userData.blog %>"><%= userData.blog %></a></p>
+            <% } %>
+
+            <% if(userData.twitter_username) { %>
+                <p title="Twitter"><i class="fa-brands fa-twitter text-gray-400"></i> <a class="text-blue-500 hover:text-blue-600" href="https://twitter.com/<%= userData.twitter_username %>">@<%= userData.twitter_username %></a></p>
+            <% } %>
+        </div>
+
+        <div class="text-left">
+            <h2 class="text-2xl font-semibold mb-2">Account Information</h2>
+
+            <p title="GitHub ID"><i class="fa-solid fa-hashtag text-gray-400"></i> <%= userData.id %></p>
+            <p title="Account Created"><i class="fa-solid fa-clock text-gray-400"></i> <%= created_at %> <span class="text-xs text-gray-400">(account created)</span></p>
+            <p title="Account Last Updated"><i class="fa-solid fa-pen text-gray-400"></i> <%= updated_at %> <span class="text-xs text-gray-400">(account last updated)</span></p>
+
+            <% if(userData.two_factor_authentication) { %>
+                <p title="Two-Factor Authentication"><i class="fa-solid fa-lock text-gray-400"></i> 2FA Enabled</p>
+            <% } else { %>
+                <p title="Two-Factor Authentication"><i class="fa-solid fa-lock-open text-gray-400"></i> 2FA Disabled</p>
+            <% } %>
+
+            <p title="Primary Email"><i class="fa-solid fa-at text-gray-400"></i> <a class="text-blue-500 hover:text-blue-600" href="<%= primaryEmail %>"><%= primaryEmail %></a> <span class="text-xs text-gray-400">(primary email)</span></p>
+            <p title="Emails"><i class="fa-solid fa-envelope text-gray-400"></i> <%= emailData.length %> Emails <span class="text-xs text-gray-400">(<%= (emailData.map(email => email.verified)).length %> verified)</span></p>
+
+            <p title="Organizations (public memberships)"><i class="fa-solid fa-building text-gray-400"></i> <%= orgData.length %> Organization<%= orgData.length === 1 ? "" : "s" %> <span class="text-xs text-gray-400">(public memberships)</span></p>
+            <p title="Following"><i class="fa-solid fa-user-plus text-gray-400"></i> <%= userData.following %> Following</p>
+            <p title="Followers"><i class="fa-solid fa-user-group text-gray-400"></i> <%= userData.followers %> Follower<%= userData.followers === 1 ? "" : "s" %></p>
+            <p title="Repositories"><i class="fa-solid fa-book-bookmark text-gray-400"></i> <%= userData.public_repos %> Public / <%= userData.total_private_repos %> Private <span class="text-xs text-gray-400">(repositories)</span></p>
+            <p title="Gists"><i class="fa-solid fa-code text-gray-400"></i> <%= userData.public_gists %> Public / <%= userData.private_gists %> Private <span class="text-xs text-gray-400">(gists)</span></p>
+            <p title="Starred Repositories"><i class="fa-solid fa-star text-gray-400"></i> <%= starredRepoData.length %> Starred Repositor<%= starredRepoData.length === 1 ? "y" : "ies" %> <span class="text-xs text-gray-400">(public repositories)</span></p>
+            <p title="Starred Gists"><i class="fa-solid fa-star text-gray-400"></i> <%= starredGistData.length %> Starred Gist<%= starredGistData.length === 1 ? "" : "s" %> <span class="text-xs text-gray-400">(public gists)</span></p>
+            <p title="Disk Usage"><i class="fa-solid fa-hard-drive text-gray-400"></i> <%= functions.formatBytes(userData.disk_usage) %> <span class="text-xs text-gray-400">(disk usage)</span></p>
+        </div>
+
+        <footer class="mt-8">        
+            <a href="/api/logout"><button class="bg-[#333333] hover:bg-[#444444] px-3 py-1.5 rounded-md"><i class="fa-brands fa-github mr-2"></i>Logout</button></a>
+
+            <p class="mt-2">&copy; 2023 <span class="font-semibold">William Harrison</span> - All Rights Reserved.</p>
+        </footer>
+    </body>
+</html>
