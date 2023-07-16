@@ -73,8 +73,8 @@
             <h2 class="text-2xl font-semibold mb-2">Account Information</h2>
 
             <p title="GitHub ID"><i class="fa-solid fa-hashtag text-gray-400"></i> <%= userData.id %></p>
-            <p title="Account Created"><i class="fa-solid fa-clock text-gray-400"></i> <%= functions.moment(created_at).format("Do MMMM YYYY, h:mma") %> <span class="text-xs text-gray-400">(account created)</span></p>
-            <p title="Account Last Updated"><i class="fa-solid fa-pen text-gray-400"></i> <%= functions.moment(updated_at).format("Do MMMM YYYY, h:mma") %> <span class="text-xs text-gray-400">(account last updated)</span></p>
+            <p title="Account Created"><i class="fa-solid fa-clock text-gray-400"></i> <span id="created_at"></span> <span class="text-xs text-gray-400">(account created)</span></p>
+            <p title="Account Last Updated"><i class="fa-solid fa-pen text-gray-400"></i> <span id="updated_at"></span> <span class="text-xs text-gray-400">(account last updated)</span></p>
 
             <% if(userData.two_factor_authentication) { %>
                 <p title="Two-Factor Authentication"><i class="fa-solid fa-lock text-gray-400"></i> 2FA Enabled</p>
@@ -101,4 +101,39 @@
             <p class="mt-2">&copy; 2023 <span class="font-semibold">William Harrison</span> - All Rights Reserved.</p>
         </footer>
     </body>
+
+    <script>
+        function getCreatedAtDate() {
+            const date = new Date("<%= created_at %>");
+
+            const formattedDate = date.toLocaleString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+            })
+
+            document.getElementById("created_at").innerHTML = formattedDate;
+        }
+
+        function getUpdatedAtDate() {
+            const date = new Date("<%= updated_at %>");
+
+            const formattedDate = date.toLocaleString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+            })
+
+            document.getElementById("updated_at").innerHTML = formattedDate;
+        }
+
+        getCreatedAtDate();
+        getUpdatedAtDate();
+    </script>
 </html>
