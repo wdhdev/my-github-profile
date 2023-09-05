@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 
 require("dotenv").config();
+const port = 80;
 
 import { Request } from "express";
 import * as Sentry from "@sentry/node";
@@ -20,7 +21,6 @@ Sentry.init({
 })
 
 import router from "./util/router";
-const port = process.env.port;
 
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
