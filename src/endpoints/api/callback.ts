@@ -28,7 +28,6 @@ export default async (req: Request & SessionData, res: Response) => {
         res.redirect("/");
     } catch(err) {
         Sentry.captureException(err);
-        console.error(err);
 
         res.render("auth/error");
     }
