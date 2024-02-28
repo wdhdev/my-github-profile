@@ -42,6 +42,3 @@ jobs:
                   push: true
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
-
-            - name: Deploy
-              run: curl -X POST ${{ secrets.WEBHOOK }}
