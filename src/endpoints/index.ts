@@ -6,7 +6,7 @@ import axios from "axios";
 import moment from "moment";
 
 export default async (req: Request & SessionData, res: Response) => {
-    if(!req.session.token) return res.status(401).render("login");
+    if(!req.session.token) return res.status(200).render("login");
 
     try {
         const { data: userData } = await axios.get("https://api.github.com/user", {
