@@ -4,8 +4,8 @@ const app = express();
 require("dotenv").config();
 const port = process.env.port || 80;
 
-import { Request } from "express";
 import * as Sentry from "@sentry/node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
 import bodyParser from "body-parser";
 import cors from "cors";
 import session from "express-session";
@@ -13,19 +13,15 @@ import session from "express-session";
 Sentry.init({
     dsn: process.env.sentry_dsn,
     integrations: [
-        new Sentry.Integrations.Http({ tracing: true }),
-        new Sentry.Integrations.Express({ app }),
-        ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations()
+        nodeProfilingIntegration()
     ],
-    tracesSampleRate: 1.0
+    tracesSampleRate: 1.0,
+    profilesSampleRate: 1.0
 })
 
 import router from "./util/router";
 
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.tracingHandler());
-
-app.use(cors<Request>({ origin: "*" }));
+app.use(cors<express.Request>({ origin: "*" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -40,7 +36,7 @@ app.use(session({
 
 app.use("/", router);
 
-app.use(Sentry.Handlers.errorHandler());
+Sentry.setupExpressErrorHandler(app);
 
 app.listen(port, () => {
     console.log(`Listening on Port: ${port}`);
