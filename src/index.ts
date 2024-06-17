@@ -41,16 +41,3 @@ Sentry.setupExpressErrorHandler(app);
 app.listen(port, () => {
     console.log(`Listening on Port: ${port}`);
 })
-
-import { exec } from "child_process";
-
-// Automatic Git Pull
-setInterval(() => {
-    exec("git pull", (err: any, stdout: any) => {
-        if(err) return console.log(err);
-        if(stdout.includes("Already up to date.")) return;
-
-        console.log(stdout);
-        process.exit();
-    })
-}, 30 * 1000) // 30 seconds
