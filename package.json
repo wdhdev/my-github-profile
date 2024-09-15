@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/wdhdev/my-github-profile/issues"
   },
-  "homepage": "https://my-github-profile.wdh.app",
+  "homepage": "https://mgp.hrsn.dev",
   "dependencies": {
     "@sentry/node": "^8.18.0",
     "@sentry/profiling-node": "^8.18.0",

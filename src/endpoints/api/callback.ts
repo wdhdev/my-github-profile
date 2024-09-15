@@ -12,7 +12,7 @@ export default async (req: Request & SessionData, res: Response) => {
         client_id: process.env.github_client_id,
         client_secret: process.env.github_client_secret,
         code: code,
-        redirect_uri: "https://my-github-profile.wdh.app/api/callback"
+        redirect_uri: "https://mgp.hrsn.dev/api/callback"
     })
 
     try {
