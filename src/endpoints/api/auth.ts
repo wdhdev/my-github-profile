@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
-import querystring from "node:querystring";
+import { URLSearchParams } from "url";
 
 export default async (req: Request, res: Response) => {
-    const params = querystring.stringify({
+    const params = new URLSearchParams({
         client_id: process.env.github_client_id,
         redirect_uri: "https://mgp.hrsn.dev/api/callback",
         scope: "read:org read:user user:email"

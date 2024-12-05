@@ -3,12 +3,12 @@ import SessionData from "../../types/SessionData";
 
 import * as Sentry from "@sentry/node";
 import axios from "axios";
-import querystring from "node:querystring";
+import { URLSearchParams } from "url";
 
 export default async (req: Request & SessionData, res: Response) => {
     const code = req.query.code as string;
 
-    const params = querystring.stringify({
+    const params = new URLSearchParams({
         client_id: process.env.github_client_id,
         client_secret: process.env.github_client_secret,
         code: code,
