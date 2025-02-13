@@ -30,7 +30,7 @@
     "moment": "^2.30.1"
   },
   "devDependencies": {
-    "@sentry/types": "^8.42.0",
+    "@sentry/types": "^9.0.0",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
