@@ -3,7 +3,6 @@ import SessionData from "../types/SessionData";
 
 import * as Sentry from "@sentry/node";
 import axios from "axios";
-import moment from "moment";
 
 export default async (req: Request & SessionData, res: Response) => {
     if(!req.session.token) return res.status(200).render("login");
@@ -55,8 +54,7 @@ export default async (req: Request & SessionData, res: Response) => {
             starredGistData: starredGistData,
             starredRepoData: starredRepoData,
             functions: {
-                formatBytes: formatBytes,
-                moment: moment
+                formatBytes: formatBytes
             }
         })
     } catch(err) {
