@@ -17,22 +17,22 @@
     "url": "https://github.com/wdhdev/my-github-profile/issues"
   },
   "dependencies": {
-    "@sentry/node": "^9.15.0",
-    "@sentry/profiling-node": "^9.15.0",
-    "axios": "^1.9.0",
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "express-session": "^1.18.1"
+    "@sentry/node": "9.15.0",
+    "@sentry/profiling-node": "9.15.0",
+    "axios": "1.9.0",
+    "body-parser": "2.2.0",
+    "cors": "2.8.5",
+    "dotenv": "16.5.0",
+    "ejs": "3.1.10",
+    "express": "5.1.0",
+    "express-session": "1.18.1"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.5",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.1",
-    "@types/express-session": "^1.18.1",
-    "@types/node": "^22.15.12",
-    "typescript": "^5.8.3"
+    "@types/body-parser": "1.19.5",
+    "@types/cors": "2.8.17",
+    "@types/express": "5.0.1",
+    "@types/express-session": "1.18.1",
+    "@types/node": "22.15.12",
+    "typescript": "5.8.3"
   }
 }
