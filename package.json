@@ -17,8 +17,8 @@
     "url": "https://github.com/wdhdev/my-github-profile/issues"
   },
   "dependencies": {
-    "@sentry/node": "9.27.0",
-    "@sentry/profiling-node": "9.27.0",
+    "@sentry/node": "9.28.0",
+    "@sentry/profiling-node": "9.28.0",
     "axios": "1.9.0",
     "body-parser": "2.2.0",
     "cors": "2.8.5",
