@@ -20,6 +20,10 @@ RUN npm ci --production
 COPY --from=builder /app/dist ./dist
 COPY views ./views
 
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
 EXPOSE ${port:-80}
 
 CMD ["npm", "start"]
