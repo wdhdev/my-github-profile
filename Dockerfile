@@ -1,11 +1,25 @@
-FROM node:24
+FROM node:24-slim AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
-COPY . .
+RUN npm ci
 
-EXPOSE 80
+COPY tsconfig.json ./
+COPY src ./src
 
-CMD npm start
+RUN npx tsc
+
+FROM node:24-slim
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --production
+
+COPY --from=builder /app/dist ./dist
+COPY views ./views
+
+EXPOSE ${port:-80}
+
+CMD ["npm", "start"]
