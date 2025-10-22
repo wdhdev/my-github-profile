@@ -1,4 +1,4 @@
-FROM node:25-slim AS builder
+FROM node:24-slim AS builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY views ./views
 
 RUN npx tsc
 
-FROM node:25-slim
+FROM node:24-slim
 
 WORKDIR /app
 
